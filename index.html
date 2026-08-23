@@ -7,6 +7,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- 피파 팩 오프닝 오버레이 -->
+  <div class="fifa-overlay hidden" id="fifaOverlay">
+    <div class="fifa-stage">
+      <div class="fifa-beam" id="fifaBeam"></div>
+      <div class="fifa-hints" id="fifaHints">
+        <div class="fifa-hint" id="fifaHintType"></div>
+        <div class="fifa-hint" id="fifaHintTar"></div>
+      </div>
+      <div class="fifa-card hidden" id="fifaCard">
+        <div class="fifa-rating" id="fifaRating"></div>
+        <div class="fifa-card-img" id="fifaCardImg"></div>
+        <div class="fifa-card-name" id="fifaCardName"></div>
+        <div class="fifa-card-meta" id="fifaCardMeta"></div>
+      </div>
+      <button class="fifa-skip" id="fifaSkip">건너뛰기 ⏭</button>
+    </div>
+  </div>
+
   <div class="modal-overlay" id="ageModal">
     <div class="modal age-modal">
       <div class="age-icon">🔞</div>
@@ -39,6 +57,12 @@
       <button class="chip" data-mode="iqos">🔥 아이코스</button>
       <button class="chip" data-mode="lilfit">💨 릴 핏</button>
       <button class="chip" data-mode="lilhybrid">🌀 릴 하이브리드</button>
+    </div>
+
+    <div class="effect-toggle" id="effectToggle">
+      <span class="effect-label">이펙트</span>
+      <button class="effect-btn active" data-effect="normal">🎰 일반</button>
+      <button class="effect-btn" data-effect="fifa">⚽ 피파</button>
     </div>
 
     <button class="gacha-btn" id="gachaBtn">🎰 뽑기!</button>

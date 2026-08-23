@@ -111,6 +111,16 @@ function spawnConfetti() {
   }
 }
 
+let currentEffect = "normal";
+
+document.querySelectorAll("#effectToggle .effect-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("#effectToggle .effect-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentEffect = btn.dataset.effect;
+  });
+});
+
 function gacha() {
   if (!isAdult) {
     alert("성인 인증 후 이용할 수 있습니다.");
@@ -120,6 +130,11 @@ function gacha() {
   const pool = CIGARETTES.filter(filter);
   if (!pool.length) return;
   const chosen = securePick(pool);
+
+  if (currentEffect === "fifa") {
+    fifaReveal(chosen, label, pool);
+    return;
+  }
 
   gachaBtn.disabled = true;
   resultCard.classList.remove("hidden", "reveal");
@@ -350,3 +365,83 @@ communityModal.addEventListener("click", (e) => {
   if (e.target === communityModal) communityModal.classList.add("hidden");
 });
 */
+
+// ===== 피파 팩 오프닝 연출 =====
+const fifaOverlay = document.getElementById("fifaOverlay");
+const fifaBeam = document.getElementById("fifaBeam");
+const fifaCard = document.getElementById("fifaCard");
+const fifaHintType = document.getElementById("fifaHintType");
+const fifaHintTar = document.getElementById("fifaHintTar");
+
+const TYPE_KO = {
+  regular: "일반", menthol: "맨솔", capsule: "캡슐",
+  iqos: "아이코스", lilfit: "릴 핏", lilhybrid: "릴 하이브리드",
+};
+
+let fifaTimers = [];
+let fifaFinish = null;
+
+function fifaClearTimers() {
+  fifaTimers.forEach(clearTimeout);
+  fifaTimers = [];
+}
+
+function fifaReveal(chosen, label, pool) {
+  gachaBtn.disabled = true;
+  // 레이팅: 75~99, 96+는 워크아웃(특별 연출)
+  const rating = 75 + secureRandomInt(25);
+  const walkout = rating >= 96;
+
+  fifaOverlay.classList.remove("hidden");
+  fifaCard.classList.add("hidden");
+  fifaCard.classList.toggle("walkout-card", walkout);
+  fifaBeam.classList.toggle("walkout", walkout);
+  fifaHintType.classList.remove("show");
+  fifaHintTar.classList.remove("show");
+  fifaHintType.textContent = TYPE_KO[chosen.type];
+  fifaHintTar.textContent = chosen.tar;
+
+  fifaFinish = () => {
+    fifaClearTimers();
+    fifaOverlay.classList.add("hidden");
+    showItem(chosen, label);
+    resultCard.classList.remove("hidden", "rolling");
+    resultCard.classList.add("reveal");
+    lastChosen = chosen;
+    spawnConfetti();
+    gachaBtn.disabled = false;
+    fifaFinish = null;
+  };
+
+  // 타임라인: 빔 → 타입 힌트 → 타르 힌트 → 플래시 → 카드 공개
+  fifaTimers.push(setTimeout(() => fifaHintType.classList.add("show"), 900));
+  fifaTimers.push(setTimeout(() => fifaHintTar.classList.add("show"), walkout ? 2100 : 1700));
+  fifaTimers.push(setTimeout(() => {
+    const flash = document.createElement("div");
+    flash.className = "fifa-flash go";
+    fifaOverlay.querySelector(".fifa-stage").appendChild(flash);
+    setTimeout(() => flash.remove(), 600);
+
+    document.getElementById("fifaRating").innerHTML =
+      `${rating}<small>${walkout ? "WALKOUT" : "RATED"}</small>`;
+    const imgSrc = `images/${encodeURIComponent(chosen.name)}.jpg`;
+    const cardImg = document.getElementById("fifaCardImg");
+    cardImg.innerHTML = `<img src="${imgSrc}" alt="${chosen.name}">`;
+    cardImg.querySelector("img").onerror = () => (cardImg.innerHTML = packSVG(chosen));
+    document.getElementById("fifaCardName").textContent = chosen.name;
+    document.getElementById("fifaCardMeta").textContent =
+      `${TYPE_KO[chosen.type]} · ${chosen.tar}${chosen.px ? " · PX" : ""}`;
+    fifaCard.classList.remove("hidden");
+    spawnConfetti();
+  }, walkout ? 3300 : 2600));
+  // 카드 확인 후 자동 종료
+  fifaTimers.push(setTimeout(() => fifaFinish && fifaFinish(), walkout ? 6800 : 6000));
+}
+
+document.getElementById("fifaSkip").addEventListener("click", () => fifaFinish && fifaFinish());
+fifaOverlay.addEventListener("click", (e) => {
+  // 카드가 공개된 뒤에는 아무 곳이나 눌러 닫기
+  if (!fifaCard.classList.contains("hidden") && e.target !== document.getElementById("fifaSkip")) {
+    fifaFinish && fifaFinish();
+  }
+});
