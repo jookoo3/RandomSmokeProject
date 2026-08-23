@@ -371,6 +371,7 @@ const fifaOverlay = document.getElementById("fifaOverlay");
 const fifaBeam = document.getElementById("fifaBeam");
 const fifaCard = document.getElementById("fifaCard");
 const fifaHintType = document.getElementById("fifaHintType");
+const fifaHintBrand = document.getElementById("fifaHintBrand");
 const fifaHintTar = document.getElementById("fifaHintTar");
 
 const TYPE_KO = {
@@ -385,6 +386,10 @@ const COMPANY_MAP = {
 };
 function brandCompany(name) {
   return COMPANY_MAP[name.split(" ")[0]] || "KT&G";
+}
+function brandName(name) {
+  const first = name.split(" ")[0];
+  return first === "글로벌" ? "던힐" : first;
 }
 
 let fifaTimers = [];
@@ -406,8 +411,10 @@ function fifaReveal(chosen, label, pool) {
   fifaCard.classList.toggle("walkout-card", walkout);
   fifaBeam.classList.toggle("walkout", walkout);
   fifaHintType.classList.remove("show");
+  fifaHintBrand.classList.remove("show");
   fifaHintTar.classList.remove("show");
   fifaHintType.textContent = brandCompany(chosen.name);
+  fifaHintBrand.textContent = brandName(chosen.name);
   fifaHintTar.textContent = chosen.tar;
 
   fifaFinish = () => {
@@ -422,9 +429,10 @@ function fifaReveal(chosen, label, pool) {
     fifaFinish = null;
   };
 
-  // 타임라인: 빔 → 타입 힌트 → 타르 힌트 → 플래시 → 카드 공개
+  // 타임라인: 빔 → 제조사 → 브랜드 → 밀리수 → 플래시 → 카드 공개
   fifaTimers.push(setTimeout(() => fifaHintType.classList.add("show"), 900));
-  fifaTimers.push(setTimeout(() => fifaHintTar.classList.add("show"), walkout ? 2100 : 1700));
+  fifaTimers.push(setTimeout(() => fifaHintBrand.classList.add("show"), walkout ? 2100 : 1700));
+  fifaTimers.push(setTimeout(() => fifaHintTar.classList.add("show"), walkout ? 3100 : 2500));
   fifaTimers.push(setTimeout(() => {
     const flash = document.createElement("div");
     flash.className = "fifa-flash go";
@@ -442,9 +450,9 @@ function fifaReveal(chosen, label, pool) {
       `${TYPE_KO[chosen.type]} · ${chosen.tar}${chosen.px ? " · PX" : ""}`;
     fifaCard.classList.remove("hidden");
     spawnConfetti();
-  }, walkout ? 3300 : 2600));
+  }, walkout ? 4300 : 3500));
   // 카드 확인 후 자동 종료
-  fifaTimers.push(setTimeout(() => fifaFinish && fifaFinish(), walkout ? 6800 : 6000));
+  fifaTimers.push(setTimeout(() => fifaFinish && fifaFinish(), walkout ? 7800 : 6900));
 }
 
 document.getElementById("fifaSkip").addEventListener("click", () => fifaFinish && fifaFinish());
