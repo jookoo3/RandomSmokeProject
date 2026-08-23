@@ -378,6 +378,15 @@ const TYPE_KO = {
   iqos: "아이코스", lilfit: "릴 핏", lilhybrid: "릴 하이브리드",
 };
 
+const COMPANY_MAP = {
+  "말보로": "필립모리스", "팔리아멘트": "필립모리스", "테리아": "필립모리스", "히츠": "필립모리스",
+  "던힐": "BAT", "켄트": "BAT", "로스만스": "BAT", "럭키스트라이크": "BAT", "보그": "BAT", "글로벌": "BAT",
+  "메비우스": "JTI", "카멜": "JTI", "윈스턴": "JTI",
+};
+function brandCompany(name) {
+  return COMPANY_MAP[name.split(" ")[0]] || "KT&G";
+}
+
 let fifaTimers = [];
 let fifaFinish = null;
 
@@ -398,7 +407,7 @@ function fifaReveal(chosen, label, pool) {
   fifaBeam.classList.toggle("walkout", walkout);
   fifaHintType.classList.remove("show");
   fifaHintTar.classList.remove("show");
-  fifaHintType.textContent = TYPE_KO[chosen.type];
+  fifaHintType.textContent = brandCompany(chosen.name);
   fifaHintTar.textContent = chosen.tar;
 
   fifaFinish = () => {
