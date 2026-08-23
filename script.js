@@ -141,8 +141,7 @@ function gacha() {
     resultCard.classList.add("reveal");
     showItem(chosen, label);
     lastChosen = chosen;
-    currentStars = 0;
-    document.querySelectorAll("#stars span").forEach((x) => x.classList.remove("on"));
+    // 평가 기능 비활성화로 별점 초기화 생략
     spawnConfetti();
     gachaBtn.disabled = false;
   }, rollTime);
@@ -267,6 +266,7 @@ function copyLink(msg = "링크가 복사됐어요! 🔗") {
 
 document.getElementById("shareCopy").addEventListener("click", () => copyLink());
 
+/* 평가·커뮤니티 기능 임시 비활성화 (GitHub Pages 정적 호스팅)
 // ===== 평가하기 (커뮤니티 DB 연동) =====
 let currentStars = 0;
 const starsEl = document.getElementById("stars");
@@ -349,3 +349,4 @@ document.getElementById("closeCommunity").addEventListener("click", () => {
 communityModal.addEventListener("click", (e) => {
   if (e.target === communityModal) communityModal.classList.add("hidden");
 });
+*/
