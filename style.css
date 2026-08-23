@@ -488,3 +488,199 @@ h1 {
   font-size: 0.9rem;
   color: #ddd;
 }
+
+/* 이펙트 토글 */
+.effect-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.effect-label { font-size: 0.8rem; color: #888; }
+
+.effect-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ccc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.effect-btn.active {
+  background: #2ecc71;
+  border-color: #2ecc71;
+  color: #0b2818;
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.5);
+}
+
+/* ===== 피파 팩 오프닝 ===== */
+.fifa-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, #10203a 0%, #050a14 70%);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fifa-overlay.hidden { display: none; }
+
+.fifa-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 빛 기둥 */
+.fifa-beam {
+  position: absolute;
+  bottom: 0;
+  width: 90px;
+  height: 100%;
+  background: linear-gradient(to top, rgba(255, 215, 120, 0.95), rgba(255, 215, 120, 0) 75%);
+  filter: blur(6px);
+  animation: beamRise 1s ease-out forwards, beamPulse 1.6s ease-in-out 1s infinite;
+  transform-origin: bottom;
+}
+
+.fifa-beam.walkout {
+  background: linear-gradient(to top, rgba(80, 220, 255, 0.95), rgba(180, 120, 255, 0) 80%);
+  width: 150px;
+}
+
+@keyframes beamRise {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes beamPulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; filter: blur(9px); }
+}
+
+/* 힌트 순차 공개 */
+.fifa-hints {
+  position: absolute;
+  top: 16%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  z-index: 2;
+}
+
+.fifa-hint {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ffd778;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 24px rgba(255, 215, 120, 0.8);
+  opacity: 0;
+  transform: translateY(24px) scale(0.85);
+}
+
+.fifa-hint.show {
+  animation: hintIn 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+}
+
+@keyframes hintIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 카드 */
+.fifa-card {
+  position: relative;
+  z-index: 3;
+  width: 240px;
+  padding: 1.6rem 1.2rem 1.4rem;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #f6e27a 0%, #cba135 55%, #8a6d1f 100%);
+  color: #2c1f03;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(255, 215, 120, 0.65), 0 24px 48px rgba(0, 0, 0, 0.6);
+  animation: cardIn 0.7s cubic-bezier(0.18, 1.5, 0.35, 1);
+}
+
+.fifa-card.walkout-card {
+  background: linear-gradient(160deg, #7ee8fa 0%, #6a5af9 60%, #2b1e66 100%);
+  color: #eef6ff;
+  box-shadow: 0 0 80px rgba(120, 200, 255, 0.8), 0 24px 48px rgba(0, 0, 0, 0.6);
+}
+
+.fifa-card.hidden { display: none; }
+
+@keyframes cardIn {
+  0% { transform: translateY(60vh) scale(0.4) rotateY(180deg); opacity: 0; }
+  60% { transform: translateY(-16px) scale(1.06) rotateY(0deg); opacity: 1; }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.fifa-rating {
+  font-size: 2.4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.fifa-rating small { display: block; font-size: 0.7rem; letter-spacing: 0.2em; }
+
+.fifa-card-img svg, .fifa-card-img img {
+  width: 110px;
+  height: 150px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.fifa-card-name {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin-top: 0.6rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.25);
+  padding-top: 0.5rem;
+}
+
+.walkout-card .fifa-card-name { border-top-color: rgba(255, 255, 255, 0.35); }
+
+.fifa-card-meta { font-size: 0.85rem; margin-top: 0.3rem; opacity: 0.85; }
+
+.fifa-skip {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ddd;
+  cursor: pointer;
+  z-index: 4;
+}
+
+/* 화면 플래시 */
+.fifa-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.fifa-flash.go { animation: flash 0.5s ease-out; }
+
+@keyframes flash {
+  0% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
