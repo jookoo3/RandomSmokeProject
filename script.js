@@ -170,7 +170,7 @@ function renderList() {
       <div class="list-item">
         <span class="dot" style="background:${c.color}"></span>
         <span class="item-name">${c.name}${c.px ? ' <span class="tag px">PX</span>' : ""}</span>
-        <span class="item-tar">${["iqos", "lilfit", "lilhybrid"].includes(c.type) ? "" : c.tar}</span>
+        <span class="item-tar">${c.tar}</span>
       </div>`
       )
       .join("");
