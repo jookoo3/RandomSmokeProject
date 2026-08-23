@@ -106,3 +106,43 @@ function pick(mode) {
 document.querySelectorAll(".mode-btn").forEach((btn) => {
   btn.addEventListener("click", () => pick(btn.dataset.mode));
 });
+
+// 전체 목록 모달
+const listModal = document.getElementById("listModal");
+const listBody = document.getElementById("listBody");
+
+const CATEGORIES = [
+  { type: "regular", title: "🔴 일반" },
+  { type: "menthol", title: "🟢 맨솔" },
+  { type: "capsule", title: "🔵 캡슐" },
+];
+
+function renderList() {
+  listBody.innerHTML = CATEGORIES.map(({ type, title }) => {
+    const items = CIGARETTES.filter((c) => c.type === type)
+      .map(
+        (c) => `
+      <div class="list-item">
+        <span class="dot" style="background:${c.color}"></span>
+        <span class="item-name">${c.name}</span>
+        <span class="item-tar">${c.tar}</span>
+      </div>`
+      )
+      .join("");
+    const count = CIGARETTES.filter((c) => c.type === type).length;
+    return `<div class="cat-title ${type}">${title} (${count})</div>${items}`;
+  }).join("");
+}
+
+document.getElementById("listBtn").addEventListener("click", () => {
+  renderList();
+  listModal.classList.remove("hidden");
+});
+
+document.getElementById("closeModal").addEventListener("click", () => {
+  listModal.classList.add("hidden");
+});
+
+listModal.addEventListener("click", (e) => {
+  if (e.target === listModal) listModal.classList.add("hidden");
+});
