@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>오늘의 담배 - 랜덤 추천</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="modal-overlay" id="ageModal">
+    <div class="modal age-modal">
+      <div class="age-icon">🔞</div>
+      <h2>성인 인증</h2>
+      <p class="age-text">이 사이트는 담배 관련 정보를 제공합니다.<br />만 19세 이상 성인이신가요?</p>
+      <div class="age-buttons">
+        <button class="age-btn yes" id="ageYes">예, 성인입니다</button>
+        <button class="age-btn no" id="ageNo">아니요</button>
+      </div>
+      <p class="age-denied hidden" id="ageDenied">⛔ 미성년자는 이용할 수 없습니다.<br />뽑기 기능이 비활성화되었습니다.</p>
+    </div>
+  </div>
+
+  <div class="top-buttons">
+    <!-- 커뮤니티 기능 임시 비활성화 (GitHub Pages 정적 호스팅)
+    <button class="top-btn" id="communityBtn" title="커뮤니티">👥</button>
+    -->
+    <button class="top-btn" id="listBtn" title="전체 목록">📋</button>
+  </div>
+
+  <main class="container">
+    <h1>🚬 오늘의 담배</h1>
+    <p class="subtitle">카테고리를 고르고 뽑기 버튼을 눌러보세요</p>
+
+    <div class="mode-chips" id="modeChips">
+      <button class="chip active" data-mode="regular">🔴 일반</button>
+      <button class="chip" data-mode="flavor">🟢 맨솔·캡슐</button>
+      <button class="chip" data-mode="all">🟣 연초 전체</button>
+      <button class="chip" data-mode="px">🪖 PX (군마트)</button>
+      <button class="chip" data-mode="iqos">🔥 아이코스</button>
+      <button class="chip" data-mode="lilfit">💨 릴 핏</button>
+      <button class="chip" data-mode="lilhybrid">🌀 릴 하이브리드</button>
+    </div>
+
+    <button class="gacha-btn" id="gachaBtn">🎰 뽑기!</button>
+
+    <div class="result-card hidden" id="resultCard">
+      <div class="result-label" id="resultLabel"></div>
+      <div class="result-image" id="resultImage"></div>
+      <div class="result-name" id="resultName">?</div>
+      <div class="result-meta" id="resultMeta"></div>
+      <div class="result-review" id="resultReview"></div>
+
+      <!-- 평가하기 기능 임시 비활성화 (GitHub Pages 정적 호스팅)
+      <div class="rating-box" id="ratingBox">
+        <div class="rating-title">이 담배 어때요? 평가하기</div>
+        <div class="stars" id="stars">
+          <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+        </div>
+        <div class="rating-form">
+          <input type="text" id="ratingComment" maxlength="80" placeholder="한줄 코멘트 (선택)" />
+          <button id="ratingSubmit">등록</button>
+        </div>
+        <div class="rating-done hidden" id="ratingDone">✅ 평가가 커뮤니티에 등록됐어요!</div>
+      </div>
+      -->
+
+      <div class="share-box">
+        <span class="share-label">공유하기</span>
+        <button class="share-btn native" id="shareNative" title="공유">📤</button>
+        <button class="share-btn kakao" id="shareKakao" title="카카오톡">💬</button>
+        <button class="share-btn x" id="shareX" title="X (트위터)">𝕏</button>
+        <button class="share-btn facebook" id="shareFb" title="페이스북">f</button>
+        <button class="share-btn insta" id="shareInsta" title="인스타그램">📷</button>
+        <button class="share-btn copy" id="shareCopy" title="링크 복사">🔗</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- 커뮤니티 모달 임시 비활성화
+  <div class="modal-overlay hidden" id="communityModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>👥 커뮤니티</h2>
+        <button class="close-btn" id="closeCommunity">✕</button>
+      </div>
+      <div class="modal-body" id="communityBody"></div>
+    </div>
+  </div>
+  -->
+
+  <div class="modal-overlay hidden" id="listModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>전체 담배 목록</h2>
+        <button class="close-btn" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body" id="listBody"></div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
