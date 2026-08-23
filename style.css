@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+  max-width: 480px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 1rem 0.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.mode-btn .desc {
+  font-size: 0.72rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.mode-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.mode-btn:active {
+  transform: translateY(0);
+}
+
+.mode-btn.regular { background: #c0392b; }
+.mode-btn.flavor  { background: #16a085; }
+.mode-btn.all     { background: #8e44ad; }
+
+.result-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 2rem;
+  animation: pop 0.3s ease;
+}
+
+.result-card.hidden {
+  display: none;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.result-label {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.result-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.result-meta {
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  margin: 0 0.2rem;
+}
+
+.tag.regular { background: #c0392b; }
+.tag.menthol { background: #16a085; }
+.tag.capsule { background: #2980b9; }
