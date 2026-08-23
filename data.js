@@ -126,6 +126,7 @@ const CIGARETTES = [
   { name: "핏 크리스프", type: "lilfit", tar: "궐련형 스틱", color: "#48c9b0", review: "바삭하게 터지는 청량감, 멘솔 스틱의 강자" },
 
   // ===== 릴 하이브리드 스틱 (믹스) =====
+  { name: "믹스 믹스", type: "lilhybrid", tar: "궐련형 스틱", color: "#9b59b6", review: "두 가지 캡슐로 즐기는 변화무쌍한 맛, 믹스의 정체성" },
   { name: "믹스 아이스", type: "lilhybrid", tar: "궐련형 스틱", color: "#85c1e9", review: "이름 그대로 얼음 같은 쿨링, 여름 필수템" },
   { name: "믹스 레귤러", type: "lilhybrid", tar: "궐련형 스틱", color: "#616a6b", review: "묵직한 연초 본연의 맛을 살린 스틱" },
   { name: "믹스 미", type: "lilhybrid", tar: "궐련형 스틱", color: "#f5b041", review: "달콤 상큼한 과일향, 호기심에 샀다가 정착한다는 평" },
