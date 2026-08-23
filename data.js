@@ -5,6 +5,7 @@ const CIGARETTES = [
   // 말보로 (PM)
   { name: "말보로 레드", px: true, type: "regular", tar: "8.0mg", color: "#c0392b", review: "묵직하고 진한 클래식, 골초들의 변함없는 스테디셀러" },
   { name: "말보로 골드", px: true, type: "regular", tar: "6.0mg", color: "#d4a017", review: "레드보다 부드럽지만 존재감은 확실한 무난한 선택" },
+  { name: "말보로 미디움", type: "regular", tar: "5.0mg", color: "#a04000", review: "레드와 골드 사이의 밸런스, 딱 중간이 좋다는 평" },
   { name: "말보로 실버", type: "regular", tar: "3.0mg", color: "#95a5a6", review: "말보로 감성 그대로 순하게, 라이트 유저 추천" },
   // 팔리아멘트 (PM)
   { name: "팔리아멘트 아쿠아 5", px: true, type: "regular", tar: "5.0mg", color: "#2471a3", review: "특유의 리세스 필터로 깔끔한 끝맛이 매력" },
@@ -32,6 +33,7 @@ const CIGARETTES = [
   { name: "메비우스 LSS 원", type: "regular", tar: "0.1mg", color: "#d6eaf8", review: "초저타르 슈퍼슬림, 거의 공기라는 우스갯소리도" },
   // 카멜 (JTI)
   { name: "카멜 필터", type: "regular", tar: "8.0mg", color: "#ca8a2a", review: "낙타 마크의 클래식, 고소하고 진한 풍미" },
+  { name: "카멜 옐로우", type: "regular", tar: "7.0mg", color: "#f1c40f", review: "카멜 특유의 고소함이 가장 진하게 살아있는 맛" },
   { name: "카멜 블루", type: "regular", tar: "6.0mg", color: "#2e86c1", review: "필터보다 부드럽게, 카멜 입문용으로 좋다는 평" },
   // 윈스턴 (JTI)
   { name: "윈스턴 레드", type: "regular", tar: "8.0mg", color: "#922b21", review: "진하고 거친 아메리칸 블렌드, 가성비도 준수" },
@@ -40,6 +42,7 @@ const CIGARETTES = [
   { name: "에쎄 수 0.5", px: true, type: "regular", tar: "0.5mg", color: "#7d8a5c", review: "초저타르인데도 맛이 비지 않다는 국민 슬림 담배" },
   { name: "에쎄 수 0.1", type: "regular", tar: "0.1mg", color: "#a9b388", review: "국내 최저 수준 타르, 흡연량 줄이기용으로 인기" },
   { name: "에쎄 프라임", px: true, type: "regular", tar: "0.45mg", color: "#8a7040", review: "슬림 특유의 고소함, 순한 맛 찾는 분들의 정착지" },
+  { name: "에쎄 라이트", type: "regular", tar: "4.5mg", color: "#a2947a", review: "에쎄 라인의 미드타르, 고소함과 순함의 균형" },
   { name: "에쎄 원", type: "regular", tar: "1.0mg", color: "#b7950b", review: "에쎄 라인업의 표준, 꾸준한 판매량의 베스트셀러" },
   { name: "에쎄 스페셜 골드", type: "regular", tar: "6.5mg", color: "#9a7d0a", review: "슬림인데 묵직한 반전 매력, 진한 슬림파 추천" },
   { name: "에쎄 골든 리프", type: "regular", tar: "5.0mg", color: "#d4ac0d", review: "황금잎 블렌딩의 고소하고 깊은 맛이 강점" },
@@ -55,6 +58,7 @@ const CIGARETTES = [
   { name: "디스 플러스", px: true, type: "regular", tar: "6.5mg", color: "#2c3e50", review: "디스보다 길어진 라지 사이즈, 오래 태우기 좋다는 평" },
   // 심플 (KT&G)
   { name: "심플 3mg", type: "regular", tar: "3.0mg", color: "#7f8c8d", review: "이름처럼 심플하고 깔끔한 맛, 꾸준한 수요" },
+  // 팔리아멘트 하이브리드는 캡슐 섹션 참조
   // 기타 KT&G
   { name: "한라산", px: true, type: "regular", tar: "8.0mg", color: "#1e8449", review: "제주 감성의 진한 맛, 아는 사람만 찾는 롱셀러" },
   { name: "라일락", type: "regular", tar: "4.5mg", color: "#9b59b6", review: "은은한 꽃향 감성, 호불호 갈리지만 팬층 확고" },
@@ -62,6 +66,7 @@ const CIGARETTES = [
   { name: "88 골드", type: "regular", tar: "6.5mg", color: "#b9770e", review: "88올림픽과 함께한 추억의 맛, 여전히 판매 중" },
   // 보헴 (KT&G)
   { name: "보헴 시가 미니", px: true, type: "regular", tar: "5.5mg", color: "#6e4a2f", review: "시가 특유의 달큰한 향, 색다른 맛 찾을 때 제격" },
+  { name: "보헴 시가 No.1", type: "regular", tar: "1.0mg", color: "#a5673f", review: "시가향을 가장 순하게, 부담 없는 저타르 시가" },
   { name: "보헴 시가 No.3", type: "regular", tar: "3.0mg", color: "#935116", review: "시가향을 순하게 즐기는 버전, 입문용으로 추천" },
   { name: "보헴 시가 No.6", type: "regular", tar: "6.5mg", color: "#5d3a1a", review: "진한 시가 풍미, 묵직한 단맛이 매력이라는 평" },
 
@@ -89,6 +94,8 @@ const CIGARETTES = [
   { name: "에쎄 체인지 빙", px: true, type: "capsule", tar: "4.5mg", color: "#5dade2", review: "얼음같은 쿨링 캡슐, 시원함 끝판왕이라는 후기" },
   { name: "에쎄 체인지 히말라야", type: "capsule", tar: "4.5mg", color: "#85c1e9", review: "히말라야급 강력 쿨링, 맨솔 매니아 저격 제품" },
   { name: "에쎄 체인지 W", type: "capsule", tar: "0.5mg", color: "#bb8fce", review: "더블 캡슐에 초저타르, 가볍게 즐기는 변화구" },
+  // 팔리아멘트 (PM)
+  { name: "팔리아멘트 하이브리드 5", type: "capsule", tar: "5.0mg", color: "#1b4f72", review: "리세스 필터에 캡슐까지, 깔끔+청량 조합" },
   // 던힐 (BAT)
   { name: "던힐 스위치", type: "capsule", tar: "6.0mg", color: "#7d3c98", review: "묵직한 맛에 캡슐 청량감, 두 마리 토끼를 잡았다는 평" },
   // 메비우스 (JTI)

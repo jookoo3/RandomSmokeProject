@@ -7,6 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="modal-overlay" id="ageModal">
+    <div class="modal age-modal">
+      <div class="age-icon">🔞</div>
+      <h2>성인 인증</h2>
+      <p class="age-text">이 사이트는 담배 관련 정보를 제공합니다.<br />만 19세 이상 성인이신가요?</p>
+      <div class="age-buttons">
+        <button class="age-btn yes" id="ageYes">예, 성인입니다</button>
+        <button class="age-btn no" id="ageNo">아니요</button>
+      </div>
+      <p class="age-denied hidden" id="ageDenied">⛔ 미성년자는 이용할 수 없습니다.<br />뽑기 기능이 비활성화되었습니다.</p>
+    </div>
+  </div>
+
   <button class="list-btn" id="listBtn" title="전체 목록">📋</button>
 
   <main class="container">

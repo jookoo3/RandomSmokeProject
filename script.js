@@ -112,6 +112,10 @@ function spawnConfetti() {
 }
 
 function gacha() {
+  if (!isAdult) {
+    alert("성인 인증 후 이용할 수 있습니다.");
+    return;
+  }
   const { label, filter } = MODE_INFO[currentMode];
   const pool = CIGARETTES.filter(filter);
   if (!pool.length) return;
@@ -184,4 +188,30 @@ document.getElementById("closeModal").addEventListener("click", () => {
 
 listModal.addEventListener("click", (e) => {
   if (e.target === listModal) listModal.classList.add("hidden");
+});
+
+// ===== 성인 인증 =====
+const ageModal = document.getElementById("ageModal");
+const ageDenied = document.getElementById("ageDenied");
+let isAdult = sessionStorage.getItem("isAdult") === "yes";
+
+if (isAdult) {
+  ageModal.classList.add("hidden");
+} else {
+  gachaBtn.disabled = true;
+}
+
+document.getElementById("ageYes").addEventListener("click", () => {
+  isAdult = true;
+  sessionStorage.setItem("isAdult", "yes");
+  gachaBtn.disabled = false;
+  ageModal.classList.add("hidden");
+});
+
+document.getElementById("ageNo").addEventListener("click", () => {
+  isAdult = false;
+  sessionStorage.removeItem("isAdult");
+  gachaBtn.disabled = true;
+  ageDenied.classList.remove("hidden");
+  setTimeout(() => ageModal.classList.add("hidden"), 1800);
 });

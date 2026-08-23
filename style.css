@@ -342,3 +342,43 @@ h1 {
 
 .cat-title.lilfit { color: #aeb6bf; border-color: #566573; }
 .cat-title.lilhybrid { color: #85c1e9; border-color: #2e86c1; }
+
+/* 성인 인증 모달 */
+.age-modal {
+  max-width: 380px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.age-icon { font-size: 3rem; margin-bottom: 0.8rem; }
+
+.age-modal h2 { margin-bottom: 0.8rem; }
+
+.age-text { color: #ccc; line-height: 1.6; margin-bottom: 1.5rem; }
+
+.age-buttons { display: flex; gap: 0.8rem; }
+
+.age-btn {
+  flex: 1;
+  padding: 0.9rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.age-btn:hover { transform: translateY(-2px); }
+.age-btn.yes { background: #27ae60; }
+.age-btn.no { background: #7f8c8d; }
+
+.age-denied {
+  margin-top: 1.2rem;
+  color: #e74c3c;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.age-denied.hidden { display: none; }
