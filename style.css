@@ -31,46 +31,6 @@ h1 {
   margin-bottom: 2rem;
 }
 
-.mode-buttons {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-}
-
-.mode-btn {
-  flex: 1;
-  padding: 1rem 0.5rem;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
-.mode-btn .desc {
-  font-size: 0.72rem;
-  font-weight: 400;
-  opacity: 0.85;
-}
-
-.mode-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-}
-
-.mode-btn:active {
-  transform: translateY(0);
-}
-
-.mode-btn.regular { background: #c0392b; }
-.mode-btn.flavor  { background: #16a085; }
-.mode-btn.all     { background: #8e44ad; }
-
 .result-card {
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -270,3 +230,112 @@ h1 {
   font-size: 0.8rem;
   flex-shrink: 0;
 }
+
+/* 카테고리 토글 칩 */
+.mode-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.chip {
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chip:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.chip.active {
+  background: #f39c12;
+  border-color: #f39c12;
+  color: #1a1a2e;
+  box-shadow: 0 0 14px rgba(243, 156, 18, 0.5);
+}
+
+/* 가챠 버튼 */
+.gacha-btn {
+  width: 100%;
+  padding: 1.1rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #e74c3c, #f39c12, #e74c3c);
+  background-size: 200% 200%;
+  animation: gachaGlow 2.5s ease infinite;
+  box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+  transition: transform 0.15s;
+}
+
+.gacha-btn:hover { transform: translateY(-3px) scale(1.02); }
+.gacha-btn:active { transform: scale(0.97); }
+.gacha-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+@keyframes gachaGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 슬롯 롤링 애니메이션 */
+.result-card.rolling .result-name {
+  animation: slotShake 0.08s linear infinite;
+  filter: blur(1px);
+  color: #f39c12;
+}
+
+@keyframes slotShake {
+  0% { transform: translateY(-2px); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(-2px); }
+}
+
+.result-card.reveal {
+  animation: revealPop 0.45s cubic-bezier(0.18, 1.6, 0.4, 1);
+}
+
+@keyframes revealPop {
+  0% { transform: scale(0.7); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* 컨페티 */
+.confetti {
+  position: fixed;
+  top: -12px;
+  width: 10px;
+  height: 10px;
+  z-index: 200;
+  pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0.6;
+  }
+}
+
+/* PX 뱃지 & 신규 태그/카테고리 색 */
+.tag.iqos { background: #b7791f; }
+.tag.lil  { background: #566573; }
+.tag.px   { background: #4d6b3c; }
+
+.cat-title.iqos { color: #e0b35a; border-color: #b7791f; }
+.cat-title.lil  { color: #aeb6bf; border-color: #566573; }

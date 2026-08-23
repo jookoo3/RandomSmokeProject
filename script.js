@@ -1,13 +1,18 @@
 const MODE_INFO = {
-  regular: { label: "일반 (맨솔·캡슐 제외)", filter: (c) => c.type === "regular" },
-  flavor: { label: "맨솔·캡슐", filter: (c) => c.type === "menthol" || c.type === "capsule" },
-  all: { label: "전체 포함", filter: () => true },
+  regular: { label: "🔴 일반 (맨솔·캡슐 제외)", filter: (c) => c.type === "regular" },
+  flavor: { label: "🟢 맨솔·캡슐", filter: (c) => c.type === "menthol" || c.type === "capsule" },
+  all: { label: "🟣 연초 전체", filter: (c) => ["regular", "menthol", "capsule"].includes(c.type) },
+  px: { label: "🪖 PX (군마트) 판매", filter: (c) => c.px === true },
+  iqos: { label: "🔥 아이코스 스틱", filter: (c) => c.type === "iqos" },
+  lil: { label: "💨 릴 스틱", filter: (c) => c.type === "lil" },
 };
 
 const TYPE_TAG = {
   regular: '<span class="tag regular">일반</span>',
   menthol: '<span class="tag menthol">맨솔</span>',
   capsule: '<span class="tag capsule">캡슐</span>',
+  iqos: '<span class="tag iqos">아이코스</span>',
+  lil: '<span class="tag lil">릴</span>',
 };
 
 const resultCard = document.getElementById("resultCard");
@@ -47,31 +52,78 @@ function packSVG(item) {
   </svg>`;
 }
 
-function pick(mode) {
-  const { label, filter } = MODE_INFO[mode];
-  const pool = CIGARETTES.filter(filter);
-  const chosen = pool[Math.floor(Math.random() * pool.length)];
+// ===== 가챠 시스템 =====
+let currentMode = "regular";
+const gachaBtn = document.getElementById("gachaBtn");
 
-  resultCard.classList.remove("hidden");
-  // 애니메이션 재생을 위해 리플로우 강제
-  void resultCard.offsetWidth;
-  resultCard.style.animation = "none";
-  requestAnimationFrame(() => (resultCard.style.animation = ""));
+document.querySelectorAll("#modeChips .chip").forEach((chip) => {
+  chip.addEventListener("click", () => {
+    document.querySelectorAll("#modeChips .chip").forEach((c) => c.classList.remove("active"));
+    chip.classList.add("active");
+    currentMode = chip.dataset.mode;
+  });
+});
 
+function showItem(item, label) {
   resultLabel.textContent = label;
   // images/제품명.jpg 가 있으면 실제 사진, 없으면 SVG 일러스트로 대체
-  const imgSrc = `images/${encodeURIComponent(chosen.name)}.jpg`;
-  resultImage.innerHTML = `<img class="pack-photo" src="${imgSrc}" alt="${chosen.name}">`;
+  const imgSrc = `images/${encodeURIComponent(item.name)}.jpg`;
+  resultImage.innerHTML = `<img class="pack-photo" src="${imgSrc}" alt="${item.name}">`;
   const img = resultImage.querySelector("img");
-  img.onerror = () => (resultImage.innerHTML = packSVG(chosen));
-  resultName.textContent = chosen.name;
-  resultMeta.innerHTML = `${TYPE_TAG[chosen.type]} 타르 ${chosen.tar}`;
-  resultReview.textContent = `💬 “${chosen.review}”`;
+  img.onerror = () => (resultImage.innerHTML = packSVG(item));
+  resultName.textContent = item.name;
+  const isStick = item.type === "iqos" || item.type === "lil";
+  const pxBadge = item.px ? ' <span class="tag px">PX</span>' : "";
+  resultMeta.innerHTML = `${TYPE_TAG[item.type]}${pxBadge} ${isStick ? item.tar : "타르 " + item.tar}`;
+  resultReview.textContent = `💬 “${item.review}”`;
 }
 
-document.querySelectorAll(".mode-btn").forEach((btn) => {
-  btn.addEventListener("click", () => pick(btn.dataset.mode));
-});
+function spawnConfetti() {
+  const colors = ["#f39c12", "#e74c3c", "#3498db", "#2ecc71", "#9b59b6", "#f1c40f"];
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement("div");
+    p.className = "confetti";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDuration = 1.2 + Math.random() * 1.5 + "s";
+    p.style.animationDelay = Math.random() * 0.3 + "s";
+    p.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 3200);
+  }
+}
+
+function gacha() {
+  const { label, filter } = MODE_INFO[currentMode];
+  const pool = CIGARETTES.filter(filter);
+  if (!pool.length) return;
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+
+  gachaBtn.disabled = true;
+  resultCard.classList.remove("hidden", "reveal");
+  resultCard.classList.add("rolling");
+  resultLabel.textContent = label;
+  resultImage.innerHTML = "";
+  resultMeta.innerHTML = "";
+  resultReview.textContent = "";
+
+  // 슬롯머신처럼 이름이 빠르게 돌아가는 연출
+  const rollTime = 1400;
+  const interval = setInterval(() => {
+    resultName.textContent = pool[Math.floor(Math.random() * pool.length)].name;
+  }, 60);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    resultCard.classList.remove("rolling");
+    resultCard.classList.add("reveal");
+    showItem(chosen, label);
+    spawnConfetti();
+    gachaBtn.disabled = false;
+  }, rollTime);
+}
+
+gachaBtn.addEventListener("click", gacha);
 
 // 전체 목록 모달
 const listModal = document.getElementById("listModal");
@@ -81,6 +133,8 @@ const CATEGORIES = [
   { type: "regular", title: "🔴 일반" },
   { type: "menthol", title: "🟢 맨솔" },
   { type: "capsule", title: "🔵 캡슐" },
+  { type: "iqos", title: "🔥 아이코스 스틱" },
+  { type: "lil", title: "💨 릴 스틱" },
 ];
 
 function renderList() {
@@ -90,8 +144,8 @@ function renderList() {
         (c) => `
       <div class="list-item">
         <span class="dot" style="background:${c.color}"></span>
-        <span class="item-name">${c.name}</span>
-        <span class="item-tar">${c.tar}</span>
+        <span class="item-name">${c.name}${c.px ? ' <span class="tag px">PX</span>' : ""}</span>
+        <span class="item-tar">${c.type === "iqos" || c.type === "lil" ? "" : c.tar}</span>
       </div>`
       )
       .join("");
