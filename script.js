@@ -52,6 +52,22 @@ function packSVG(item) {
   </svg>`;
 }
 
+// 암호학적 난수 기반 균등 추첨 (모듈로 편향 제거)
+function secureRandomInt(max) {
+  const limit = Math.floor(0xffffffff / max) * max;
+  const buf = new Uint32Array(1);
+  let v;
+  do {
+    crypto.getRandomValues(buf);
+    v = buf[0];
+  } while (v >= limit);
+  return v % max;
+}
+
+function securePick(pool) {
+  return pool[secureRandomInt(pool.length)];
+}
+
 // ===== 가챠 시스템 =====
 let currentMode = "regular";
 const gachaBtn = document.getElementById("gachaBtn");
@@ -97,7 +113,7 @@ function gacha() {
   const { label, filter } = MODE_INFO[currentMode];
   const pool = CIGARETTES.filter(filter);
   if (!pool.length) return;
-  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  const chosen = securePick(pool);
 
   gachaBtn.disabled = true;
   resultCard.classList.remove("hidden", "reveal");
@@ -110,7 +126,7 @@ function gacha() {
   // 슬롯머신처럼 이름이 빠르게 돌아가는 연출
   const rollTime = 1400;
   const interval = setInterval(() => {
-    resultName.textContent = pool[Math.floor(Math.random() * pool.length)].name;
+    resultName.textContent = securePick(pool).name;
   }, 60);
 
   setTimeout(() => {
