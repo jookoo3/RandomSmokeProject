@@ -1,39 +1,39 @@
 // type: "regular"(일반) | "menthol"(맨솔) | "capsule"(캡슐)
 const CIGARETTES = [
   // 일반
-  { name: "말보로 레드", type: "regular", tar: "8.0mg" },
-  { name: "말보로 골드", type: "regular", tar: "6.0mg" },
-  { name: "던힐 6mg", type: "regular", tar: "6.0mg" },
-  { name: "던힐 1mg", type: "regular", tar: "1.0mg" },
-  { name: "팔리아멘트 아쿠아 5", type: "regular", tar: "5.0mg" },
-  { name: "메비우스 오리지널", type: "regular", tar: "6.0mg" },
-  { name: "메비우스 스카이블루", type: "regular", tar: "3.0mg" },
-  { name: "에쎄 수", type: "regular", tar: "0.5mg" },
-  { name: "에쎄 프라임", type: "regular", tar: "0.45mg" },
-  { name: "더원 화이트", type: "regular", tar: "1.0mg" },
-  { name: "타임 미드", type: "regular", tar: "4.5mg" },
-  { name: "클라우드 나인", type: "regular", tar: "3.0mg" },
-  { name: "보헴 시가 미니", type: "regular", tar: "5.5mg" },
-  { name: "라일락", type: "regular", tar: "4.5mg" },
-  { name: "럭키스트라이크", type: "regular", tar: "6.0mg" },
+  { name: "말보로 레드", type: "regular", tar: "8.0mg", color: "#c0392b" },
+  { name: "말보로 골드", type: "regular", tar: "6.0mg", color: "#d4a017" },
+  { name: "던힐 6mg", type: "regular", tar: "6.0mg", color: "#5d1f1f" },
+  { name: "던힐 1mg", type: "regular", tar: "1.0mg", color: "#b8a06a" },
+  { name: "팔리아멘트 아쿠아 5", type: "regular", tar: "5.0mg", color: "#2471a3" },
+  { name: "메비우스 오리지널", type: "regular", tar: "6.0mg", color: "#1a3c8f" },
+  { name: "메비우스 스카이블루", type: "regular", tar: "3.0mg", color: "#5dade2" },
+  { name: "에쎄 수", type: "regular", tar: "0.5mg", color: "#7d8a5c" },
+  { name: "에쎄 프라임", type: "regular", tar: "0.45mg", color: "#8a7040" },
+  { name: "더원 화이트", type: "regular", tar: "1.0mg", color: "#95a5a6" },
+  { name: "타임 미드", type: "regular", tar: "4.5mg", color: "#e67e22" },
+  { name: "클라우드 나인", type: "regular", tar: "3.0mg", color: "#7f8fa6" },
+  { name: "보헴 시가 미니", type: "regular", tar: "5.5mg", color: "#6e4a2f" },
+  { name: "라일락", type: "regular", tar: "4.5mg", color: "#9b59b6" },
+  { name: "럭키스트라이크", type: "regular", tar: "6.0mg", color: "#b03a2e" },
 
   // 맨솔
-  { name: "말보로 아이스 블라스트", type: "menthol", tar: "5.0mg" },
-  { name: "메비우스 LSS 윈드블루", type: "menthol", tar: "1.0mg" },
-  { name: "에쎄 멘솔", type: "menthol", tar: "4.5mg" },
-  { name: "던힐 스위치 프로스트", type: "menthol", tar: "6.0mg" },
-  { name: "카멜 프레쉬", type: "menthol", tar: "5.0mg" },
-  { name: "쿨 부스트", type: "menthol", tar: "5.0mg" },
+  { name: "말보로 아이스 블라스트", type: "menthol", tar: "5.0mg", color: "#1abc9c" },
+  { name: "메비우스 LSS 윈드블루", type: "menthol", tar: "1.0mg", color: "#48c9b0" },
+  { name: "에쎄 멘솔", type: "menthol", tar: "4.5mg", color: "#27ae60" },
+  { name: "던힐 스위치 프로스트", type: "menthol", tar: "6.0mg", color: "#16a085" },
+  { name: "카멜 프레쉬", type: "menthol", tar: "5.0mg", color: "#45b39d" },
+  { name: "쿨 부스트", type: "menthol", tar: "5.0mg", color: "#117a65" },
 
   // 캡슐
-  { name: "레종 프렌치 블랙", type: "capsule", tar: "3.0mg" },
-  { name: "레종 휘바", type: "capsule", tar: "5.0mg" },
-  { name: "에쎄 체인지", type: "capsule", tar: "4.5mg" },
-  { name: "에쎄 체인지 빙", type: "capsule", tar: "4.5mg" },
-  { name: "던힐 스위치", type: "capsule", tar: "6.0mg" },
-  { name: "메비우스 LBS 퍼펄", type: "capsule", tar: "1.0mg" },
-  { name: "보헴 파이프 마스터", type: "capsule", tar: "5.0mg" },
-  { name: "말보로 비스타", type: "capsule", tar: "4.0mg" },
+  { name: "레종 프렌치 블랙", type: "capsule", tar: "3.0mg", color: "#2c3e50" },
+  { name: "레종 휘바", type: "capsule", tar: "5.0mg", color: "#3498db" },
+  { name: "에쎄 체인지", type: "capsule", tar: "4.5mg", color: "#8e44ad" },
+  { name: "에쎄 체인지 빙", type: "capsule", tar: "4.5mg", color: "#5dade2" },
+  { name: "던힐 스위치", type: "capsule", tar: "6.0mg", color: "#7d3c98" },
+  { name: "메비우스 LBS 퍼펄", type: "capsule", tar: "1.0mg", color: "#af7ac5" },
+  { name: "보헴 파이프 마스터", type: "capsule", tar: "5.0mg", color: "#784212" },
+  { name: "말보로 비스타", type: "capsule", tar: "4.0mg", color: "#e74c8c" },
 ];
 
 const MODE_INFO = {
@@ -50,8 +50,39 @@ const TYPE_TAG = {
 
 const resultCard = document.getElementById("resultCard");
 const resultLabel = document.getElementById("resultLabel");
+const resultImage = document.getElementById("resultImage");
 const resultName = document.getElementById("resultName");
 const resultMeta = document.getElementById("resultMeta");
+
+// 브랜드 컬러 기반 담뱃갑 SVG 일러스트 생성
+function packSVG(item) {
+  const brand = item.name.split(" ")[0];
+  const rest = item.name.split(" ").slice(1).join(" ");
+  const icon =
+    item.type === "menthol" ? "❄️" : item.type === "capsule" ? "⚪" : "";
+  return `
+  <svg viewBox="0 0 130 190" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="rgba(255,255,255,0.25)"/>
+        <stop offset="0.15" stop-color="rgba(255,255,255,0)"/>
+        <stop offset="0.9" stop-color="rgba(0,0,0,0.2)"/>
+      </linearGradient>
+    </defs>
+    <rect x="5" y="5" width="120" height="180" rx="10" fill="${item.color}"/>
+    <rect x="5" y="5" width="120" height="180" rx="10" fill="url(#shade)"/>
+    <rect x="5" y="5" width="120" height="42" rx="10" fill="rgba(255,255,255,0.92)"/>
+    <rect x="5" y="37" width="120" height="10" fill="rgba(255,255,255,0.92)"/>
+    <text x="65" y="32" text-anchor="middle" font-size="15" font-weight="800"
+      fill="${item.color}" font-family="sans-serif">${brand}</text>
+    <text x="65" y="105" text-anchor="middle" font-size="11" font-weight="700"
+      fill="#fff" font-family="sans-serif">${rest || brand}</text>
+    ${icon ? `<text x="65" y="135" text-anchor="middle" font-size="20">${icon}</text>` : ""}
+    <rect x="25" y="152" width="80" height="22" rx="4" fill="rgba(0,0,0,0.35)"/>
+    <text x="65" y="167" text-anchor="middle" font-size="10" fill="#fff"
+      font-family="sans-serif">TAR ${item.tar}</text>
+  </svg>`;
+}
 
 function pick(mode) {
   const { label, filter } = MODE_INFO[mode];
@@ -65,6 +96,7 @@ function pick(mode) {
   requestAnimationFrame(() => (resultCard.style.animation = ""));
 
   resultLabel.textContent = label;
+  resultImage.innerHTML = packSVG(chosen);
   resultName.textContent = chosen.name;
   resultMeta.innerHTML = `${TYPE_TAG[chosen.type]} 타르 ${chosen.tar}`;
 }

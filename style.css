@@ -94,6 +94,18 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+.result-image {
+  display: flex;
+  justify-content: center;
+  margin: 0.8rem 0 1rem;
+}
+
+.result-image svg {
+  width: 130px;
+  height: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.45));
+}
+
 .result-name {
   font-size: 1.8rem;
   font-weight: 800;
