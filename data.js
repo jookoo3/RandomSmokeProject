@@ -111,15 +111,17 @@ const CIGARETTES = [
   { name: "테리아 루비 징", type: "iqos", tar: "궐련형 스틱", color: "#922b3e", review: "상큼한 베리 쿨링, 화사한 향이 매력이라는 후기" },
   { name: "테리아 블루", type: "iqos", tar: "궐련형 스틱", color: "#2874a6", review: "부드러운 청량감, 무난하게 즐기는 데일리 스틱" },
 
-  // ===== 릴 전용 스틱 (핏 / 믹스) =====
-  { name: "핏 레귤러", type: "lil", tar: "궐련형 스틱", color: "#7f8c8d", review: "담백한 연초맛의 기본 스틱, 릴 유저의 표준" },
-  { name: "핏 레귤러 스카이", type: "lil", tar: "궐련형 스틱", color: "#5dade2", review: "레귤러보다 가볍고 산뜻한 맛이라는 평" },
-  { name: "핏 체인지", type: "lil", tar: "궐련형 스틱", color: "#8e44ad", review: "캡슐로 맛 전환, 지루할 틈 없다는 후기" },
-  { name: "핏 체인지 업", type: "lil", tar: "궐련형 스틱", color: "#af7ac5", review: "체인지의 업그레이드, 더 진해진 캡슐 풍미" },
-  { name: "핏 크리스프", type: "lil", tar: "궐련형 스틱", color: "#48c9b0", review: "바삭하게 터지는 청량감, 멘솔 스틱의 강자" },
-  { name: "믹스 아이스", type: "lil", tar: "궐련형 스틱", color: "#85c1e9", review: "이름 그대로 얼음 같은 쿨링, 여름 필수템" },
-  { name: "믹스 레귤러", type: "lil", tar: "궐련형 스틱", color: "#616a6b", review: "묵직한 연초 본연의 맛을 살린 스틱" },
-  { name: "믹스 미", type: "lil", tar: "궐련형 스틱", color: "#f5b041", review: "달콤 상큼한 과일향, 호기심에 샀다가 정착한다는 평" },
-  { name: "믹스 마쥬", type: "lil", tar: "궐련형 스틱", color: "#eb984e", review: "이국적인 망고향 캡슐, 확실한 개성파" },
-  { name: "믹스 프레소", type: "lil", tar: "궐련형 스틱", color: "#6e2c00", review: "구수한 커피향 스틱, 레종 프렌치 감성이라는 후기" },
+  // ===== 릴 핏 스틱 (릴 솔리드/에이블용) =====
+  { name: "핏 레귤러", type: "lilfit", tar: "궐련형 스틱", color: "#7f8c8d", review: "담백한 연초맛의 기본 스틱, 릴 유저의 표준" },
+  { name: "핏 레귤러 스카이", type: "lilfit", tar: "궐련형 스틱", color: "#5dade2", review: "레귤러보다 가볍고 산뜻한 맛이라는 평" },
+  { name: "핏 체인지", type: "lilfit", tar: "궐련형 스틱", color: "#8e44ad", review: "캡슐로 맛 전환, 지루할 틈 없다는 후기" },
+  { name: "핏 체인지 업", type: "lilfit", tar: "궐련형 스틱", color: "#af7ac5", review: "체인지의 업그레이드, 더 진해진 캡슐 풍미" },
+  { name: "핏 크리스프", type: "lilfit", tar: "궐련형 스틱", color: "#48c9b0", review: "바삭하게 터지는 청량감, 멘솔 스틱의 강자" },
+
+  // ===== 릴 하이브리드 스틱 (믹스) =====
+  { name: "믹스 아이스", type: "lilhybrid", tar: "궐련형 스틱", color: "#85c1e9", review: "이름 그대로 얼음 같은 쿨링, 여름 필수템" },
+  { name: "믹스 레귤러", type: "lilhybrid", tar: "궐련형 스틱", color: "#616a6b", review: "묵직한 연초 본연의 맛을 살린 스틱" },
+  { name: "믹스 미", type: "lilhybrid", tar: "궐련형 스틱", color: "#f5b041", review: "달콤 상큼한 과일향, 호기심에 샀다가 정착한다는 평" },
+  { name: "믹스 마쥬", type: "lilhybrid", tar: "궐련형 스틱", color: "#eb984e", review: "이국적인 망고향 캡슐, 확실한 개성파" },
+  { name: "믹스 프레소", type: "lilhybrid", tar: "궐련형 스틱", color: "#6e2c00", review: "구수한 커피향 스틱, 레종 프렌치 감성이라는 후기" },
 ];

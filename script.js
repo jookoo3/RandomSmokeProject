@@ -4,7 +4,8 @@ const MODE_INFO = {
   all: { label: "🟣 연초 전체", filter: (c) => ["regular", "menthol", "capsule"].includes(c.type) },
   px: { label: "🪖 PX (군마트) 판매", filter: (c) => c.px === true },
   iqos: { label: "🔥 아이코스 스틱", filter: (c) => c.type === "iqos" },
-  lil: { label: "💨 릴 스틱", filter: (c) => c.type === "lil" },
+  lilfit: { label: "💨 릴 핏 (솔리드·에이블)", filter: (c) => c.type === "lilfit" },
+  lilhybrid: { label: "🌀 릴 하이브리드 (믹스)", filter: (c) => c.type === "lilhybrid" },
 };
 
 const TYPE_TAG = {
@@ -12,7 +13,8 @@ const TYPE_TAG = {
   menthol: '<span class="tag menthol">맨솔</span>',
   capsule: '<span class="tag capsule">캡슐</span>',
   iqos: '<span class="tag iqos">아이코스</span>',
-  lil: '<span class="tag lil">릴</span>',
+  lilfit: '<span class="tag lil">릴 핏</span>',
+  lilhybrid: '<span class="tag lil">릴 하이브리드</span>',
 };
 
 const resultCard = document.getElementById("resultCard");
@@ -88,7 +90,7 @@ function showItem(item, label) {
   const img = resultImage.querySelector("img");
   img.onerror = () => (resultImage.innerHTML = packSVG(item));
   resultName.textContent = item.name;
-  const isStick = item.type === "iqos" || item.type === "lil";
+  const isStick = ["iqos", "lilfit", "lilhybrid"].includes(item.type);
   const pxBadge = item.px ? ' <span class="tag px">PX</span>' : "";
   resultMeta.innerHTML = `${TYPE_TAG[item.type]}${pxBadge} ${isStick ? item.tar : "타르 " + item.tar}`;
   resultReview.textContent = `💬 “${item.review}”`;
@@ -150,7 +152,8 @@ const CATEGORIES = [
   { type: "menthol", title: "🟢 맨솔" },
   { type: "capsule", title: "🔵 캡슐" },
   { type: "iqos", title: "🔥 아이코스 스틱" },
-  { type: "lil", title: "💨 릴 스틱" },
+  { type: "lilfit", title: "💨 릴 핏 스틱 (솔리드·에이블)" },
+  { type: "lilhybrid", title: "🌀 릴 하이브리드 스틱 (믹스)" },
 ];
 
 function renderList() {
@@ -161,7 +164,7 @@ function renderList() {
       <div class="list-item">
         <span class="dot" style="background:${c.color}"></span>
         <span class="item-name">${c.name}${c.px ? ' <span class="tag px">PX</span>' : ""}</span>
-        <span class="item-tar">${c.type === "iqos" || c.type === "lil" ? "" : c.tar}</span>
+        <span class="item-tar">${["iqos", "lilfit", "lilhybrid"].includes(c.type) ? "" : c.tar}</span>
       </div>`
       )
       .join("");
