@@ -140,6 +140,9 @@ function gacha() {
     resultCard.classList.remove("rolling");
     resultCard.classList.add("reveal");
     showItem(chosen, label);
+    lastChosen = chosen;
+    currentStars = 0;
+    document.querySelectorAll("#stars span").forEach((x) => x.classList.remove("on"));
     spawnConfetti();
     gachaBtn.disabled = false;
   }, rollTime);
@@ -214,4 +217,135 @@ document.getElementById("ageNo").addEventListener("click", () => {
   gachaBtn.disabled = true;
   ageDenied.classList.remove("hidden");
   setTimeout(() => ageModal.classList.add("hidden"), 1800);
+});
+
+// ===== 공유하기 =====
+let lastChosen = null;
+
+function shareText() {
+  return lastChosen
+    ? `🚬 오늘의 담배 뽑기 결과: ${lastChosen.name}! 너도 뽑아봐 👉`
+    : "🚬 오늘의 담배 - 랜덤 뽑기! 너도 해봐 👉";
+}
+
+document.getElementById("shareNative").addEventListener("click", async () => {
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: "오늘의 담배", text: shareText(), url: location.href });
+    } catch {}
+  } else {
+    copyLink();
+  }
+});
+
+document.getElementById("shareKakao").addEventListener("click", () => {
+  // 카카오 SDK 앱 키가 없어 링크 복사로 대체 (키 발급 후 Kakao.Share 연동 가능)
+  copyLink("카카오톡에 붙여넣어 공유하세요! 링크가 복사됐어요 💬");
+});
+
+document.getElementById("shareX").addEventListener("click", () => {
+  window.open(
+    `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText())}&url=${encodeURIComponent(location.href)}`,
+    "_blank"
+  );
+});
+
+document.getElementById("shareFb").addEventListener("click", () => {
+  window.open(
+    `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(location.href)}`,
+    "_blank"
+  );
+});
+
+document.getElementById("shareInsta").addEventListener("click", () => {
+  copyLink("인스타그램은 링크 공유가 안 돼서 복사했어요! 스토리/DM에 붙여넣으세요 📷");
+});
+
+function copyLink(msg = "링크가 복사됐어요! 🔗") {
+  navigator.clipboard.writeText(`${shareText()} ${location.href}`).then(() => alert(msg));
+}
+
+document.getElementById("shareCopy").addEventListener("click", () => copyLink());
+
+// ===== 평가하기 (커뮤니티 DB 연동) =====
+let currentStars = 0;
+const starsEl = document.getElementById("stars");
+const ratingDone = document.getElementById("ratingDone");
+
+starsEl.querySelectorAll("span").forEach((s) => {
+  s.addEventListener("click", () => {
+    currentStars = Number(s.dataset.v);
+    starsEl.querySelectorAll("span").forEach((x) =>
+      x.classList.toggle("on", Number(x.dataset.v) <= currentStars)
+    );
+  });
+});
+
+document.getElementById("ratingSubmit").addEventListener("click", async () => {
+  if (!lastChosen) return alert("먼저 뽑기를 해주세요!");
+  if (!currentStars) return alert("별점을 선택해주세요! ⭐");
+  const comment = document.getElementById("ratingComment").value.trim();
+  const res = await fetch("/api/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ product: lastChosen.name, stars: currentStars, comment }),
+  });
+  if (res.ok) {
+    ratingDone.classList.remove("hidden");
+    document.getElementById("ratingComment").value = "";
+    setTimeout(() => ratingDone.classList.add("hidden"), 2000);
+  } else {
+    alert("등록에 실패했어요 😢");
+  }
+});
+
+// ===== 커뮤니티 모달 =====
+const communityModal = document.getElementById("communityModal");
+const communityBody = document.getElementById("communityBody");
+
+async function renderCommunity() {
+  communityBody.innerHTML = '<div class="comm-empty">불러오는 중...</div>';
+  try {
+    const { posts, stats } = await (await fetch("/api/posts")).json();
+    if (!posts.length) {
+      communityBody.innerHTML =
+        '<div class="comm-empty">아직 평가가 없어요.<br>첫 번째로 뽑고 평가를 남겨보세요! 🎰</div>';
+      return;
+    }
+    const top = [...stats].sort((a, b) => b.avg - a.avg || b.cnt - a.cnt).slice(0, 3);
+    const summary = `<div class="comm-summary">🏆 평점 TOP: ${top
+      .map((t) => `<b>${t.product}</b> ★${t.avg} (${t.cnt})`)
+      .join(" · ")}</div>`;
+    communityBody.innerHTML =
+      summary +
+      posts
+        .map(
+          (p) => `
+      <div class="comm-post">
+        <div class="comm-head">
+          <span class="comm-name">${p.product}</span>
+          <span class="comm-stars">${"★".repeat(p.stars)}${"☆".repeat(5 - p.stars)}</span>
+        </div>
+        ${p.comment ? `<div class="comm-comment">${p.comment.replace(/</g, "&lt;")}</div>` : ""}
+        <div class="comm-time">${p.nickname} · ${p.created_at}</div>
+      </div>`
+        )
+        .join("");
+  } catch {
+    communityBody.innerHTML =
+      '<div class="comm-empty">서버에 연결할 수 없어요.<br><code>node server.js</code>로 실행해주세요.</div>';
+  }
+}
+
+document.getElementById("communityBtn").addEventListener("click", () => {
+  renderCommunity();
+  communityModal.classList.remove("hidden");
+});
+
+document.getElementById("closeCommunity").addEventListener("click", () => {
+  communityModal.classList.add("hidden");
+});
+
+communityModal.addEventListener("click", (e) => {
+  if (e.target === communityModal) communityModal.classList.add("hidden");
 });

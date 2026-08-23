@@ -111,10 +111,16 @@ h1 {
 .tag.menthol { background: #16a085; }
 .tag.capsule { background: #2980b9; }
 
-.list-btn {
+.top-buttons {
   position: fixed;
   top: 1.2rem;
   right: 1.2rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.top-btn {
   width: 48px;
   height: 48px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -126,7 +132,7 @@ h1 {
   z-index: 10;
 }
 
-.list-btn:hover {
+.top-btn:hover {
   background: rgba(255, 255, 255, 0.18);
   transform: translateY(-2px);
 }
@@ -382,3 +388,103 @@ h1 {
 }
 
 .age-denied.hidden { display: none; }
+
+/* 평가하기 */
+.rating-box {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.rating-title { font-size: 0.85rem; color: #aaa; margin-bottom: 0.4rem; }
+
+.stars { font-size: 1.7rem; cursor: pointer; margin-bottom: 0.6rem; }
+.stars span { color: #555; transition: color 0.1s, transform 0.1s; }
+.stars span.on { color: #f1c40f; }
+.stars span:hover { transform: scale(1.2); }
+
+.rating-form { display: flex; gap: 0.5rem; }
+
+.rating-form input {
+  flex: 1;
+  padding: 0.55rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #eee;
+  font-size: 0.85rem;
+}
+
+.rating-form button {
+  padding: 0.55rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #f39c12;
+  color: #1a1a2e;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rating-done { margin-top: 0.6rem; color: #2ecc71; font-size: 0.85rem; }
+.rating-done.hidden { display: none; }
+
+/* 공유하기 */
+.share-box {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.share-label { font-size: 0.8rem; color: #888; margin-right: 0.2rem; }
+
+.share-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.share-btn:hover { transform: translateY(-3px); }
+.share-btn.native { background: #6c5ce7; }
+.share-btn.kakao { background: #fee500; }
+.share-btn.x { background: #111; }
+.share-btn.facebook { background: #1877f2; }
+.share-btn.insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.share-btn.copy { background: #576574; }
+
+/* 커뮤니티 */
+.comm-empty { color: #888; text-align: center; padding: 2rem 0; }
+
+.comm-post {
+  padding: 0.8rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.comm-post .comm-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+
+.comm-post .comm-name { font-weight: 700; font-size: 0.95rem; }
+.comm-post .comm-stars { color: #f1c40f; font-size: 0.9rem; }
+.comm-post .comm-comment { color: #ccc; font-size: 0.88rem; line-height: 1.5; }
+.comm-post .comm-time { color: #777; font-size: 0.75rem; margin-top: 0.3rem; }
+
+.comm-summary {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  color: #ddd;
+}

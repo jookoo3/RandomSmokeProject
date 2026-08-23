@@ -20,7 +20,10 @@
     </div>
   </div>
 
-  <button class="list-btn" id="listBtn" title="전체 목록">📋</button>
+  <div class="top-buttons">
+    <button class="top-btn" id="communityBtn" title="커뮤니티">👥</button>
+    <button class="top-btn" id="listBtn" title="전체 목록">📋</button>
+  </div>
 
   <main class="container">
     <h1>🚬 오늘의 담배</h1>
@@ -44,8 +47,40 @@
       <div class="result-name" id="resultName">?</div>
       <div class="result-meta" id="resultMeta"></div>
       <div class="result-review" id="resultReview"></div>
+
+      <div class="rating-box" id="ratingBox">
+        <div class="rating-title">이 담배 어때요? 평가하기</div>
+        <div class="stars" id="stars">
+          <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
+        </div>
+        <div class="rating-form">
+          <input type="text" id="ratingComment" maxlength="80" placeholder="한줄 코멘트 (선택)" />
+          <button id="ratingSubmit">등록</button>
+        </div>
+        <div class="rating-done hidden" id="ratingDone">✅ 평가가 커뮤니티에 등록됐어요!</div>
+      </div>
+
+      <div class="share-box">
+        <span class="share-label">공유하기</span>
+        <button class="share-btn native" id="shareNative" title="공유">📤</button>
+        <button class="share-btn kakao" id="shareKakao" title="카카오톡">💬</button>
+        <button class="share-btn x" id="shareX" title="X (트위터)">𝕏</button>
+        <button class="share-btn facebook" id="shareFb" title="페이스북">f</button>
+        <button class="share-btn insta" id="shareInsta" title="인스타그램">📷</button>
+        <button class="share-btn copy" id="shareCopy" title="링크 복사">🔗</button>
+      </div>
     </div>
   </main>
+
+  <div class="modal-overlay hidden" id="communityModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>👥 커뮤니티</h2>
+        <button class="close-btn" id="closeCommunity">✕</button>
+      </div>
+      <div class="modal-body" id="communityBody"></div>
+    </div>
+  </div>
 
   <div class="modal-overlay hidden" id="listModal">
     <div class="modal">
